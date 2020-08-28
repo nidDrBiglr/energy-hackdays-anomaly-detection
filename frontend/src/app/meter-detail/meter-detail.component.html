@@ -1,3 +1,8 @@
-<nz-page-header class="site-page-header" nzTitle="Details for Meter XYZ" nzSubtitle="{{meterId}}"></nz-page-header>
-<app-chart [meterId]="meterId"></app-chart>
-<app-alerts [meterId]="meterId"></app-alerts>
+<div *ngIf="meterId === null">
+  <nz-page-header class="site-page-header" nzTitle="Select a Meter to view Details"></nz-page-header>
+</div>
+<div *ngIf="meterId !== null">
+  <nz-page-header class="site-page-header" nzTitle="Details for Meter XYZ" nzSubtitle="{{meterId}}"></nz-page-header>
+  <app-chart [meterId]="meterId"></app-chart>
+  <app-alerts [meterId]="meterId"></app-alerts>
+</div>

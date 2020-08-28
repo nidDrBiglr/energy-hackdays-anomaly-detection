@@ -25,7 +25,14 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.browserOnly(() => {
       this.initializeChart();
-      this.chart.data = this.dataService.getData(this.meterId);
+      this.dataService.getData(this.meterId).subscribe((data: any[]) => {
+        // somehow amcharts is not able to parse the ISO string direclty
+        data.forEach((value) => {
+          // todo: use moment instead
+          value.date = new Date(value.time);
+        });
+        this.chart.data = data;
+      });
     });
   }
 
@@ -57,7 +64,7 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
     // series config
     const series = chart.series.push(new am4charts.LineSeries());
     series.dataFields.dateX = 'date';
-    series.dataFields.valueY = 'value';
+    series.dataFields.valueY = 'kWh';
     series.tooltipText = '{valueY.value} kW/h';
 
     this.chart = chart;

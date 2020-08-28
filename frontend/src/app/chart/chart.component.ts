@@ -5,6 +5,9 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { DataService } from '../service/data.service';
+import { Moment } from 'moment';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-chart',
@@ -15,6 +18,8 @@ import { DataService } from '../service/data.service';
 export class ChartComponent implements OnDestroy, AfterViewInit {
   private chart: am4charts.XYChart;
   @Input() meterId: string;
+  @Input() from: Moment;
+  @Input() to: Moment;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,
@@ -25,8 +30,8 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.browserOnly(() => {
       this.initializeChart();
-      this.dataService.getData(this.meterId).subscribe((data: any[]) => {
-        // somehow amcharts is not able to parse the ISO string direclty
+      this.dataService.getData(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe((data: any[]) => {
+        // somehow amcharts is not able to parse the ISO string directly
         data.forEach((value) => {
           // todo: use moment instead
           value.date = new Date(value.time);

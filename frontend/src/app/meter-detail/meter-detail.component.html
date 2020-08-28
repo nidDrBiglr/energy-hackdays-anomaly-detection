@@ -1,0 +1,17 @@
+<div *ngIf="meterId === null">
+  <nz-page-header class="site-page-header" nzTitle="Select a Meter to view Details"></nz-page-header>
+</div>
+<div *ngIf="meterId !== null">
+  <nz-page-header class="site-page-header" nzTitle="Details for Meter XYZ" nzSubtitle="{{meterId}}"></nz-page-header>
+  <div id="time-range">
+    <button nz-button nzType="primary" (click)="previousPeriod()">
+      <i nz-icon nzType="left" nzTheme="outline"></i>
+    </button>
+    <span id="range-indicator">{{from | date:'dd.MM.yyyy'}} - {{to | date:'dd.MM.yyyy'}}</span>
+    <button nz-button nzType="primary" (click)="nextPeriod()">
+      <i nz-icon nzType="right" nzTheme="outline"></i>
+    </button>
+  </div>
+  <app-chart [meterId]="meterId" [from]="from" [to]="to"></app-chart>
+  <app-alerts [meterId]="meterId"></app-alerts>
+</div>

@@ -1,0 +1,97 @@
+version: "3.5"
+
+services:
+  prototype-service:
+    image: eu.gcr.io/akenzacore/prototype-service:latest
+    build:
+      context: .
+      args:
+        JAR_FILE: target/prototype-service-0.0.1-SNAPSHOT.jar
+    ports:
+      - 8080:8080
+      - 8880:8880
+    depends_on:
+      - jaeger
+    entrypoint: ["java",
+                 "-Djava.security.egd=file:/dev/./urandom",
+                 "-Dspring.data.mongodb.uri=mongodb://admin:rootpw@mongodb:27017/platform?authSource=admin",
+                 "-Dspring.datasource.url=jdbc:mysql://mysqldb:3306/cera_dev?user=akenzadbuser&password=akenzapw&useSSL=false",
+                 "-jar",
+                 "/app.jar"
+    ]
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    container_name: "prototype-service-jaeger"
+    ports:
+      - "6831:6831/udp"
+      - "16686:16686"
+
+    # Prometheus and Grafana
+    # see https://finestructure.co/blog/2016/5/16/monitoring-with-prometheus-grafana-docker-part-1
+  prometheus:
+    image: prom/prometheus:v2.7.0
+    container_name: 'prototype-service-prometheus'
+    volumes:
+      - ./monitoring/prometheus/:/etc/prometheus/
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+    ports:
+      - "9090:9090"
+    restart: always
+
+    # Grafana is a better UI for Prometheus
+    # not properly configured yet
+  grafana:
+    image: grafana/grafana:5.4.3
+    container_name: 'prototype-service-grafana'
+    volumes:
+      - ./monitoring/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./tmp/grafana:/var/lib/grafana
+    env_file:
+      - ./monitoring/grafana/config.monitoring
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+
+#  mongodb:
+#    image: mongo:latest
+#    container_name: 'prototype-service-mongodb'
+#    ports:
+#      - 27017:27017
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: "admin"
+#      MONGO_INITDB_ROOT_PASSWORD: "rootpw"
+#      MONGO_INITDB_DATABASE: "platform"
+#      MONGODB_USERNAME: "test"
+#      MONGODB_PASSWORD: "test123"
+#      MONGODB_DATABASE: "platform"
+#    healthcheck:
+#      test: ["CMD", "bash", "/healthcheck/mongo-healthcheck"]
+#      interval: 10s
+#      timeout: 8s
+#      retries: 3
+#    volumes:
+#      - ./tmp/mongodata:/data/db
+#      - ./monitoring/docker:/healthcheck
+#      - ./src/test/resources/mongo/init-db.d:/docker-entrypoint-initdb.d/
+
+#  mysqldb:
+#    image: mysql:5.7
+#    container_name: 'prototype-service-mysql'
+#    ports:
+#      - 3306:3306
+#    volumes:
+#      - ./tmp/mysql:/var/lib/mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: rootpw
+#      MYSQL_USER: akenzadbuser
+#      MYSQL_PASSWORD: akenzapw
+#      MYSQL_DATABASE: cera_dev
+#    healthcheck:
+#      test: "mysqladmin ping -h127.0.0.1 -uroot -prootpw --silent"
+#      interval: 10s
+#      timeout: 8s
+#      retries: 3

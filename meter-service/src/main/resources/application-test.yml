@@ -1,0 +1,14 @@
+security:
+  oauth2:
+  resource:
+    jwk.key-set-uri: "http://localhost:8007/.well-known/jwks.json"
+
+info:
+  app:
+    java:
+      target: 1.8
+
+
+logging:
+  level:
+    root: info

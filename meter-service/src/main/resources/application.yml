@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: meter-service
+  main:
+    banner-mode: off
+
+#add the following lines for mongodb config
+#  data:
+#    mongodb:
+#      uri: mongodb://admin:rootpw@localhost:27017/platform?authSource=admin
+
+server:
+  port: 8080
+
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 6831
+    log-spans: false
+  spring:
+    cloud:
+      jdbc:
+        ignoreStatements: "/* ping */ SELECT 1"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health,info,prometheus'
+    enabled-by-default: true
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    prometheus:
+      enabled: true
+      cache:
+        time-to-live: 0ms
+    info:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  info:
+    git:
+      mode: simple
+  server:
+    port: 8880
+
+info:
+  app:
+    java:
+      target: @java.version@

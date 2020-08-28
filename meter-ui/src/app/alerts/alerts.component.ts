@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Moment } from 'moment';
-import * as moment from 'moment';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-alerts',
@@ -11,27 +11,14 @@ export class AlertsComponent implements OnInit {
   @Input() meterId: string;
   @Input() from: Moment;
   @Input() to: Moment;
-  dataSet: {value: number, severity: string, date: any }[] = [
-    {
-      severity: 'HIGH',
-      value: 120,
-      date: moment(),
-    },
-    {
-      severity: 'MEDIUM',
-      value: 70,
-      date: moment(),
-    },
-    {
-      severity: 'LOW',
-      value: 20,
-      date: moment(),
-    }
-  ];
+  dataSet: any[] = [];
 
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit(): void {
+    this.alertService.getData(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe(data => {
+      this.dataSet = data;
+    });
   }
 
 }

@@ -1,26 +1,30 @@
-<nz-table #basicTable [nzData]="dataSet" [nzNoResult]="empty">
-  <thead>
-  <tr>
-    <th>Severity</th>
-    <th>Value</th>
-    <th>Timestamp</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td>
-      <i nz-icon nzType="warning" style="color: red" nzTheme="outline" *ngIf="data.severity === 'HIGH'"></i>
-      <i nz-icon nzType="info-circle" style="color: orange" nzTheme="outline" *ngIf="data.severity === 'MEDIUM'"></i>
-      <i nz-icon nzType="issues-close" style="color: green" nzTheme="outline" *ngIf="data.severity === 'LOW'"></i>
-    </td>
-    <td>{{data.value}}</td>
-    <td>{{data.date | date : 'dd.MM.yyyy hh:mm:ss'}}</td>
-  </tr>
-  </tbody>
-</nz-table>
-<ng-template #empty>
-  <nz-empty nzNotFoundImage="simple" [nzNotFoundContent]="emptyContent"></nz-empty>
-</ng-template>
-<ng-template #emptyContent>
-  No Anomalies or Alerts
-</ng-template>
+<div class="content">
+  <h2>Alerts & Anomalies</h2>
+  <nz-table #basicTable [nzData]="dataSet" [nzNoResult]="empty" [nzShowPagination]="false">
+    <thead>
+    <tr>
+      <th>Severity</th>
+      <th>Value</th>
+      <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>
+        <i nz-icon nzType="warning" style="color: red; font-size: 30px;" nzTheme="outline" *ngIf="data.severity === 'HIGH'"></i>
+        <i nz-icon nzType="info-circle" style="color: orange; font-size: 30px;" nzTheme="outline" *ngIf="data.severity === 'MEDIUM'"></i>
+        <i nz-icon nzType="issues-close" style="color: green; font-size: 30px;" nzTheme="outline" *ngIf="data.severity === 'LOW'"></i>
+      </td>
+      <td>{{data.kWh}} kWh</td>
+      <td>{{data.time | date : 'dd.MM.yyyy hh:mm:ss'}}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+  <ng-template #empty>
+    <nz-empty nzNotFoundImage="simple" [nzNotFoundContent]="emptyContent"></nz-empty>
+  </ng-template>
+  <ng-template #emptyContent>
+    No Anomalies or Alerts
+  </ng-template>
+</div>
+

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Moment } from 'moment';
-import { AlertService } from '../service/alert.service';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-alerts',
@@ -13,10 +13,10 @@ export class AlertsComponent implements OnInit {
   @Input() to: Moment;
   dataSet: any[] = [];
 
-  constructor(private alertService: AlertService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.alertService.getData(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe(data => {
+    this.dataService.getAnomalies(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe(data => {
       this.dataSet = data;
     });
   }

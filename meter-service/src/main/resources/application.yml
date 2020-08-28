@@ -6,10 +6,6 @@ spring:
 
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
-  #add the following lines for mongodb config
-  #  data:
-  #    mongodb:
-  #      uri: mongodb://admin:rootpw@localhost:27017/platform?authSource=admin
 
   # Kafka
   kafka:
@@ -28,6 +24,11 @@ spring:
 
     listener:
       missing-topics-fatal: false
+
+app:
+  mongo-db-properties:
+    uri: ${MONGO_URI}
+    database: meter_data
 
 server:
   port: 8080

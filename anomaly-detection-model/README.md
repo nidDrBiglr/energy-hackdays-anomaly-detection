@@ -40,3 +40,32 @@ https://github.com/rob-med/awesome-TS-anomaly-detection
 
 Data:
 https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014#
+
+https://github.com/xiufengliu/DataGenerator-Cluster-Version
+
+https://www.researchgate.net/profile/Xiufeng_Liu2/publication/280830589_Streamlining_Smart_Meter_Data_Analytics/links/55c867e308aebc967df89f1d.pdf
+
+## Thresholding
+
+Expert knowhow:
+
+- Baseload (especially during weekends)
+  - total baseload
+  - delta baseload
+- Fast Fourier Transform (Frequency Analysis)
+  - small variance in amplitude is good for energy producer
+- Gradient might be interesting, because
+- Negative values
+- Zero values
+
+## Stat
+
+https://www.tigera.io/blog/deploy-your-first-deep-learning-model-on-kubernetes-with-python-keras-flask-and-docker/
+
+```
+docker build --no-cache -t eu.gcr.io/akenza-core-staging/anomaly-detection-model:v0.0.1 .
+docker push eu.gcr.io/akenza-core-staging/anomaly-detection-model:v0.0.1
+
+docker run -p 5000:5000  eu.gcr.io/akenza-core-staging/anomaly-detection-model:v0.0.1
+curl -X POST -F image=@dog.jpg 'http://localhost:5000/predict'
+```

@@ -7,7 +7,6 @@ import { ChartComponent } from './chart/chart.component';
 import { AlertsComponent } from './alerts/alerts.component';
 import { MeterListComponent } from './meter-list/meter-list.component';
 import { DataService } from './service/data.service';
-import { AlertService } from './service/alert.service';
 import { MeterService } from './service/meter.service';
 import { MeterDetailComponent } from './meter-detail/meter-detail.component';
 import {
@@ -50,7 +49,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NzEmptyModule
   ],
   providers: [
-    AlertService,
     DataService,
     MeterService,
   ],

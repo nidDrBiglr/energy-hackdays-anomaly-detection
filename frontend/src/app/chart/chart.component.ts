@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, NgZone, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, NgZone, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 import * as am4core from '@amcharts/amcharts4/core';
@@ -14,6 +14,7 @@ import { DataService } from '../service/data.service';
 
 export class ChartComponent implements OnDestroy, AfterViewInit {
   private chart: am4charts.XYChart;
+  @Input() meterId: string;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId,
@@ -24,7 +25,7 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.browserOnly(() => {
       this.initializeChart();
-      this.chart.data = this.dataService.getData();
+      this.chart.data = this.dataService.getData(this.meterId);
     });
   }
 

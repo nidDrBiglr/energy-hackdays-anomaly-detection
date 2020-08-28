@@ -9,17 +9,33 @@ import { MeterListComponent } from './meter-list/meter-list.component';
 import { DataService } from './service/data.service';
 import { AlertService } from './service/alert.service';
 import { MeterService } from './service/meter.service';
+import { MeterDetailComponent } from './meter-detail/meter-detail.component';
+import { NzBreadCrumbModule, NzIconModule, NzLayoutModule, NzMenuModule, NzPageHeaderModule } from 'ng-zorro-antd';
+import { HttpClientModule } from '@angular/common/http';
+import { IconModule } from '@ant-design/icons-angular';
+import { AppRoutingModule } from './app.routing';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChartComponent,
     AlertsComponent,
-    MeterListComponent
+    MeterListComponent,
+    MeterDetailComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    IconModule,
+    NzLayoutModule,
+    NzBreadCrumbModule,
+    NzMenuModule,
+    NzIconModule,
+    NzPageHeaderModule,
+    AppRoutingModule,
   ],
   providers: [
     AlertService,

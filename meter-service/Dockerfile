@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk:14-alpine
 
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar

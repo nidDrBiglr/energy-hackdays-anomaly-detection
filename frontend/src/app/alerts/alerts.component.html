@@ -1,0 +1,20 @@
+<nz-table #basicTable [nzData]="dataSet">
+  <thead>
+  <tr>
+    <th>Severity</th>
+    <th>Value</th>
+    <th>Timestamp</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>
+      <i nz-icon nzType="warning" style="color: red" nzTheme="outline" *ngIf="data.severity === 'HIGH'"></i>
+      <i nz-icon nzType="info-circle" style="color: orange" nzTheme="outline" *ngIf="data.severity === 'MEDIUM'"></i>
+      <i nz-icon nzType="issues-close" style="color: green" nzTheme="outline" *ngIf="data.severity === 'LOW'"></i>
+    </td>
+    <td>{{data.value}}</td>
+    <td>{{data.date | date : 'dd.MM.yyyy hh:mm:ss'}}</td>
+  </tr>
+  </tbody>
+</nz-table>

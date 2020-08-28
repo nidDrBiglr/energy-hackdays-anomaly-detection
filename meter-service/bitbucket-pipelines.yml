@@ -1,0 +1,105 @@
+image:
+  name: gcr.io/oneplatform-1138/java8-google-runner-dc:latest
+  username: _json_key
+  password: "$GCR_JSON_KEY"
+
+clone:
+  depth: full # SonarCloud scanner needs the full history to assign issues properly
+
+definitions:
+  caches:
+    sonar: ~/.sonar/cache # Caching SonarCloud artifacts will speed up your build
+    git-modules: .git/modules
+  steps:
+    - step: &init
+        name: Init
+        script:
+          - git submodule update --init --recursive --remote
+        artifacts:
+          - repo/**
+        caches:
+          - git-modules
+    - step: &test
+        name: Build and Test
+        script:
+          - bash ./repo/test.sh --java
+        artifacts:
+          - ./**/surefire-reports/**/*.xml
+          - ./**/failsafe-reports/**/*.xml
+          - ./**/test-results/**/*.xml
+          - ./**/test-reports/**/*.xml
+        caches:
+          - docker
+          - maven
+        services:
+          - docker
+    - step: &code-quality
+        name: Code Quality
+        script:
+          - bash ./repo/quality.sh --java
+        caches:
+          - maven
+          - sonar
+
+pipelines:
+  branches:
+    dev:
+      - step: *init
+      - step: *test
+      - step:
+          name: Deploy
+          deployment: dev
+          services:
+            - docker
+          script:
+            - bash ./repo/deploy.sh dev --java --gcp
+          caches:
+            - docker
+            - maven
+          artifacts:
+            - null
+    staging:
+      - step: *init
+      - step: *test
+      - step: *code-quality
+      - step:
+          name: Deploy
+          deployment: staging
+          services:
+            - docker
+          script:
+            - bash ./repo/deploy.sh staging --java --gcp
+          caches:
+            - docker
+            - maven
+    master:
+      - step: *init
+      - step: *test
+      - step: *code-quality
+      - step:
+          name: Deploy
+          deployment: prod
+          services:
+            - docker
+          script:
+            - bash ./repo/deploy.sh prod --java --gcp
+          caches:
+            - docker
+            - maven
+    dedicated-latest:
+      - step: *init
+      - step: *test
+      - step:
+          name: Deploy
+          deployment: dedicated-latest
+          script:
+            - bash ./repo/deploy.sh dedicated --java
+          services:
+            - docker
+          caches:
+            - docker
+            - maven
+  pull-requests:
+    "**": #this runs as default for any branch not elsewhere defined
+      - step: *init
+      - step: *test

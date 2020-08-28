@@ -4,7 +4,6 @@ import io.opentracing.Span;
 import io.opentracing.util.GlobalTracer;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -72,12 +71,6 @@ public class GlobalErrorAttributes extends DefaultErrorAttributes {
       return map;
     }
 
-    if (exception instanceof AuthenticationException) {
-      map.put("message", exception.getMessage());
-      map.put("status", HttpStatus.UNAUTHORIZED.value());
-      map.put("error", HttpStatus.UNAUTHORIZED.getReasonPhrase());
-      return map;
-    }
     //unhandled exception
     map.put("message", "Something went wrong!");
     map.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());

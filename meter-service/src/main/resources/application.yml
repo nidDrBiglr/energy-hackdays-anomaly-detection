@@ -4,10 +4,31 @@ spring:
   main:
     banner-mode: off
 
-#add the following lines for mongodb config
-#  data:
-#    mongodb:
-#      uri: mongodb://admin:rootpw@localhost:27017/platform?authSource=admin
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+
+  # Kafka
+  kafka:
+    bootstrap-servers: "pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092"
+    properties:
+      ssl.endpoint.identification.algorithm: https
+      sasl.mechanism: PLAIN
+      request.timeout.ms: 20000
+      security.protocol: SASL_SSL
+      retry.backoff.ms: 500
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${CLUSTER_API_KEY}' password='${CLUSTER_API_SECRET}';
+      # Confluent Cloud Schema Registry
+      schema.registry.url: ${SR_URL}
+      schema.registry.basic.auth.user.info: ${SR_API_KEY}:${SR_API_SECRET}
+      basic.auth.credentials.source: USER_INFO
+
+    listener:
+      missing-topics-fatal: false
+
+app:
+  mongo-db-properties:
+    uri: ${MONGO_URI}
+    database: meter_data
 
 server:
   port: 8080

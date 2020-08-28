@@ -5,7 +5,7 @@ export class DataService {
 
   constructor() {}
 
-  getData(): {}[] {
+  getData(meterId: string): {}[] {
     const data = [];
     let visits = 10;
     for (let i = 1; i < 366; i++) {

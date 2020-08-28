@@ -1,4 +1,4 @@
-<nz-table #basicTable [nzData]="dataSet">
+<nz-table #basicTable [nzData]="dataSet" [nzNoResult]="empty">
   <thead>
   <tr>
     <th>Severity</th>
@@ -18,3 +18,9 @@
   </tr>
   </tbody>
 </nz-table>
+<ng-template #empty>
+  <nz-empty nzNotFoundImage="simple" [nzNotFoundContent]="emptyContent"></nz-empty>
+</ng-template>
+<ng-template #emptyContent>
+  No Anomalies or Alerts
+</ng-template>

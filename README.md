@@ -21,6 +21,7 @@ A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomal
   - Implement online learning
   
 
+![Approach Draft](approach.jpg "Approach Draft")
 ## Development
 
 ### Frontend

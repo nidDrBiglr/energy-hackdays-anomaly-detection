@@ -12,7 +12,7 @@ import { MeterService } from './service/meter.service';
 import { MeterDetailComponent } from './meter-detail/meter-detail.component';
 import {
   NzBreadCrumbModule,
-  NzButtonModule, NzDividerModule,
+  NzButtonModule, NzDividerModule, NzEmptyModule,
   NzIconModule,
   NzLayoutModule,
   NzMenuModule,
@@ -46,7 +46,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AppRoutingModule,
     NzButtonModule,
     NzTableModule,
-    NzDividerModule
+    NzDividerModule,
+    NzEmptyModule
   ],
   providers: [
     AlertService,

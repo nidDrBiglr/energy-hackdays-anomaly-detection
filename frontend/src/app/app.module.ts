@@ -10,7 +10,15 @@ import { DataService } from './service/data.service';
 import { AlertService } from './service/alert.service';
 import { MeterService } from './service/meter.service';
 import { MeterDetailComponent } from './meter-detail/meter-detail.component';
-import { NzBreadCrumbModule, NzIconModule, NzLayoutModule, NzMenuModule, NzPageHeaderModule } from 'ng-zorro-antd';
+import {
+  NzBreadCrumbModule,
+  NzButtonModule, NzDividerModule,
+  NzIconModule,
+  NzLayoutModule,
+  NzMenuModule,
+  NzPageHeaderModule,
+  NzTableModule
+} from 'ng-zorro-antd';
 import { HttpClientModule } from '@angular/common/http';
 import { IconModule } from '@ant-design/icons-angular';
 import { AppRoutingModule } from './app.routing';
@@ -36,6 +44,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NzIconModule,
     NzPageHeaderModule,
     AppRoutingModule,
+    NzButtonModule,
+    NzTableModule,
+    NzDividerModule
   ],
   providers: [
     AlertService,

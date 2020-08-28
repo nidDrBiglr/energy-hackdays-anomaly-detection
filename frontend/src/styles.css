@@ -31,3 +31,8 @@ nz-content {
 nz-footer {
   text-align: center;
 }
+
+#time-range>#range-indicator {
+  margin: 0 15px;
+  font-size: 18px;
+}

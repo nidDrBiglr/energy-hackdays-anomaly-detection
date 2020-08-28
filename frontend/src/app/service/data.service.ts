@@ -8,7 +8,7 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
-  getData(meterId: string): Observable<any> {
+  getData(meterId: string, from: string, to: string): Observable<any> {
     return this.http.get(this.url);
   }
 

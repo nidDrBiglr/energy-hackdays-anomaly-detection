@@ -3,9 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="25c9efab-4124-4b37-b6bb-0d00549927de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/alerts/alerts.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/alerts/alerts.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/alerts/alerts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/alerts/alerts.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/chart/chart.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/chart/chart.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/meter-detail/meter-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/meter-detail/meter-detail.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/meter-detail/meter-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/meter-detail/meter-detail.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/service/data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/service/data.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +112,7 @@
       <workItem from="1598612299833" duration="547000" />
       <workItem from="1598613059165" duration="187000" />
       <workItem from="1598613306448" duration="7869000" />
-      <workItem from="1598623286990" duration="2255000" />
+      <workItem from="1598623286990" duration="5392000" />
     </task>
     <task id="LOCAL-00001" summary="adds .gitignore at root folder as well">
       <created>1598613917163</created>
@@ -127,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598624564212</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="displays json data">
+      <created>1598625884174</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1598625884174</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,13 +155,14 @@
     <MESSAGE value="adds basic components &#10;adds basic chart implementation" />
     <MESSAGE value="adds routing" />
     <MESSAGE value="adds routing&#10;adds mock data" />
-    <option name="LAST_COMMIT_MESSAGE" value="adds routing&#10;adds mock data" />
+    <MESSAGE value="displays json data" />
+    <option name="LAST_COMMIT_MESSAGE" value="displays json data" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="278" y="58" key="CommitChangelistDialog2" timestamp="1598624563924">
+    <state x="278" y="58" key="CommitChangelistDialog2" timestamp="1598625883999">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="278" y="58" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598624563924" />
+    <state x="278" y="58" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598625883999" />
     <state x="168" y="93" key="DiffContextDialog" timestamp="1598613821847">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -155,10 +171,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="478" y="293" key="MultipleFileMergeDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1598613846297" />
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1598624595905">
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2" timestamp="1598625887498">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1598624595905" />
+    <state x="440" y="265" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1598625887498" />
     <state x="638" y="446" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598613843968">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -167,10 +183,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="541" y="157" width="598" height="735" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1598614458383" />
-    <state width="600" height="428" key="javadoc.popup" timestamp="1598617360292">
+    <state width="600" height="428" key="javadoc.popup" timestamp="1598628248973">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="600" height="428" key="javadoc.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1598617360292" />
+    <state width="600" height="428" key="javadoc.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1598628248973" />
     <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1598624827238">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>

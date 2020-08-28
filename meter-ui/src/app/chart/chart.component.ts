@@ -99,6 +99,7 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
     const bullet = this.anomalies.bullets.push(new am4charts.Bullet());
     const circle = bullet.createChild(am4core.Circle);
     circle.radius = 6;
+// todo: add forecasts, fetch data from api
 
     this.chart = chart;
   }

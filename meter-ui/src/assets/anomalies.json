@@ -1,0 +1,9 @@
+[
+  {"time":"2016-01-07T14:45:00Z","kWh":7.77, "severity":  "HIGH"},
+  {"time":"2016-02-18T05:00:00Z","kWh":2.49, "severity":  "HIGH"},
+  {"time":"2016-04-20T03:30:00Z","kWh":2.55, "severity":  "MEDIUM"},
+  {"time":"2016-04-29T10:00:00Z","kWh":6.09, "severity":  "LOW"},
+  {"time":"2016-09-04T05:15:00Z","kWh":3.36, "severity":  "LOW"},
+  {"time":"2017-03-05T00:30:00Z","kWh":3.21, "severity":  "HIGH"},
+  {"time":"2017-05-10T17:45:00Z","kWh":5.01, "severity":  "MEDIUM"}
+]

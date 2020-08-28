@@ -17,6 +17,8 @@ import * as moment from 'moment';
 
 export class ChartComponent implements OnDestroy, AfterViewInit {
   private chart: am4charts.XYChart;
+  private data: am4charts.LineSeries;
+  private anomalies: am4charts.LineSeries;
   @Input() meterId: string;
   @Input() from: Moment;
   @Input() to: Moment;
@@ -33,10 +35,15 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
       this.dataService.getData(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe((data: any[]) => {
         // somehow amcharts is not able to parse the ISO string directly
         data.forEach((value) => {
-          // todo: use moment instead
-          value.date = new Date(value.time);
+          value.date = moment(value.time).toDate();
         });
-        this.chart.data = data;
+        this.data.data = data;
+      });
+      this.dataService.getAnomalies(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe((anomalies: any[]) => {
+        anomalies.forEach((value) => {
+          value.date = moment(value.time).toDate();
+        });
+        this.anomalies.data = anomalies;
       });
     });
   }
@@ -60,17 +67,38 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
     // x-axis configs
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.grid.template.location = 0;
-    //dateAxis.tooltip.disabled = true;
+    dateAxis.dateFormats.setKey('year', 'dd.MM.yyyy');
+    dateAxis.dateFormats.setKey('month', 'dd.MM.yyyy');
+    dateAxis.dateFormats.setKey('week', 'dd.MM.yyyy');
+    dateAxis.dateFormats.setKey('day', 'dd.MM.yyyy');
+    dateAxis.dateFormats.setKey('hour', 'dd.MM.yyyy hh:mm:ss');
+    dateAxis.periodChangeDateFormats.setKey('year', 'dd.MM.yyyy');
+    dateAxis.periodChangeDateFormats.setKey('month', 'dd.MM.yyyy');
+    dateAxis.periodChangeDateFormats.setKey('week', 'dd.MM.yyyy');
+    dateAxis.periodChangeDateFormats.setKey('day', 'dd.MM.yyyy');
+    dateAxis.periodChangeDateFormats.setKey('hour', 'dd.MM.yyyy');
+    dateAxis.tooltip.disabled = true;
     // y-axis config
     const valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text = 'consumption (kW/h)';
+    valueAxis.title.text = 'consumption (kWh)';
     valueAxis.renderer.minWidth = 35;
     valueAxis.tooltip.disabled = true;
     // series config
-    const series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = 'date';
-    series.dataFields.valueY = 'kWh';
-    series.tooltipText = '{valueY.value} kW/h';
+    this.data = chart.series.push(new am4charts.LineSeries());
+    this.data.dataFields.dateX = 'date';
+    this.data.dataFields.valueY = 'kWh';
+    this.data.tooltipText = '{valueY.value} kWh';
+    this.anomalies = chart.series.push(new am4charts.LineSeries());
+    this.anomalies.dataFields.dateX = 'date';
+    this.anomalies.dataFields.valueY = 'kWh';
+    this.anomalies.tooltip.disabled = true;
+    this.anomalies.connect = false;
+    this.anomalies.stroke = am4core.color('#ff0000');
+    this.anomalies.fill = am4core.color('#ff0000');
+    this.anomalies.strokeWidth = 20;
+    const bullet = this.anomalies.bullets.push(new am4charts.Bullet());
+    const circle = bullet.createChild(am4core.Circle);
+    circle.radius = 6;
 
     this.chart = chart;
   }

@@ -7,12 +7,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   min-height: 100vh;
 }
 
-.logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px;
-}
-
 nz-header {
   background: #fff;
   padding: 0;
@@ -25,14 +19,23 @@ nz-content {
 .inner-content {
   padding: 24px;
   background: #fff;
-  min-height: 360px;
+  min-height: calc(100vh - 50px);
 }
 
 nz-footer {
   text-align: center;
 }
 
+.layout {
+  min-height: 100vh;
+}
+
 #time-range>#range-indicator {
-  margin: 0 15px;
+  margin: 40px 15px 0;
   font-size: 18px;
+}
+
+.ant-layout-sider-children {
+  position: fixed !important;
+  width: 200px;
 }

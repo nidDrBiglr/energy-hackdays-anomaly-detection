@@ -27,7 +27,7 @@ A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomal
   - Implement online prediction of anomalies
   - Implement online learning
 
-![Approach Draft](https://github.com/nidDrBiglr/energy-hackdays-anomaly-detection/blob/master/approach.jpg "Approach Draft")
+![Approach Draft](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/approach.jpg "Approach Draft")
 
 ## Development
 

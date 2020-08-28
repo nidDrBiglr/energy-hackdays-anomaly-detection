@@ -22,12 +22,14 @@ def load_model():
 def predict():
     # initialize the data dictionary that will be returned from the
     # view
-    data = {"success": False}
+    data = {}
     if flask.request.method == "POST":
-        prob = 0.9
-        r = {"label": label, "probability": float(prob)}
-        data["predictions"].append(r)
-    data["success"] = True
+        data = {
+            "prob": 0.9,  
+            "label": "anomaly",
+            "severity": "HIGH",
+            "success": False
+        }
 
     # return the data dictionary as a JSON response
     return flask.jsonify(data)

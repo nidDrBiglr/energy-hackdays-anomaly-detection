@@ -6,7 +6,7 @@ Energy consumption in buildings and industry is often wasted due to user behavio
 
 This challenge is looking for data scientists to apply their skills to an anomaly detection problem using smart meter data. Ideally, such an algorithm should begin to operate after as little as 3 months and should improve over time. A platform to visualise the anomalies would also be useful. Users can select any type of machine learning algorithms that they wish to in order to detect the anomalies from the data.
 
-### Data
+###  Data
 
 A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomaly-detection-smart-meter-data-sample) can be found on kaggle. Participants are encouraged to find other smart meter data to work with in order to test their algorithms.
 
@@ -19,3 +19,16 @@ A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomal
   - Simulate incoming data with the newly acquired datasets
   - Implement online prediction of anomalies
   - Implement online learning
+  
+
+## Development
+
+### Frontend
+To locally start the development server, first run `npm install` and afterwards `npm start`. This will start a development server which is reachable at http://localhost:4200
+
+To build and push the docker image, run the following commands
+```
+npm run build-prod
+docker build --no-cache -t eu.gcr.io/akenza-core-staging/meter-service-ui:v0.0.1 .  
+docker push eu.gcr.io/akenza-core-staging/meter-service-ui:v0.0.1
+```

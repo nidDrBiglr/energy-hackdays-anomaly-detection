@@ -52,7 +52,7 @@ We have implemented a scalable architecture, based on the following components:
 
 Our approach is to combine expert knowhow and statistical models to detect anomalies. Further, for us to understand if our model has produced useful outputs, anomalies should be labelled based on a predefined set of characteristics (e.g. peak energy consumption, high baseload etc.).
 
-### Thresholding
+### Expert Model
 
 Very simple cases of anomalies should actually be detected using expert knowhow. For this, we defined a standardised expert model based on historic data:
 

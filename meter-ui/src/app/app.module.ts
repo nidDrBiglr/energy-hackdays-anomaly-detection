@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IconModule } from '@ant-design/icons-angular';
 import { AppRoutingModule } from './app.routing';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PubSubService } from './service/pubsub.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
   providers: [
     DataService,
     MeterService,
+    PubSubService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,16 @@
-# Anomaly Detection Model
+# Anomaly Detection Model
 
 ## Data
 
 The original dataset is hosted on [Kaggle](https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014#).
 
-During the course of the Hackathon, we created 
+During the course of the Hackathon, we have created multiple other datasets (kindly provided by [Solarify](https://solarify.ch/?lang=en)) that can be found under `./data`.
 
 ## Model Selection
 
-Our approach is to combine expert knowhow and statistical models to detect anomalies . 
-Experts 
+Our approach is to combine expert knowhow and statistical models to detect anomalies. Further, for us to understand if our model has produced useful outputs, anomalies should be labelled based on a predefined set of characteristics (e.g. peak energy consumption, high baseload etc.).
 
-### Thresholding
+### Thresholding
 
 Very simple cases of anomalies should actually be detected using expert knowhow.
 
@@ -32,11 +31,15 @@ A more sophisticated ML/Stats-based model should be used to find unusual pattern
 
 **Models**
 
+We have tried the following models:
+
 - Isolation Forest: Isolation Forest detects anomalies purely based on the fact that anomalies are data points that are few and different.
 - 
-- ARIMA Model: 
+- ARIMA Model: Time-series forecasting model and 
 
-
+-- Minutely/Hourly Model (Online) --> Predictive Model
+-- Daily Model (Historic)
+-- Weekly Model (Historic)
 
 ## Dev Setup
 
@@ -64,10 +67,10 @@ jupyter notebook
 Build application:
 
 ```
-docker build -t eu.gcr.io/akenza-core-staging/anomaly-detection-model:v0.0.1 .
-docker push eu.gcr.io/akenza-core-staging/anomaly-detection-model:v0.0.1
+docker build -t eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.3 .
+docker push eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.3
 
-docker run -p 5000:5000  eu.gcr.io/akenza-core-staging/anomaly-detection-model:v0.0.1
+docker run -p 5000:5000  eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.3
 curl -X POST 'http://localhost:5000/predict'
 ```
 

@@ -4,42 +4,6 @@
 
 The original dataset is hosted on [Kaggle](https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014#).
 
-During the course of the Hackathon, we have created multiple other datasets (kindly provided by [Solarify](https://solarify.ch/?lang=en)) that can be found under `./data`.
-
-## Model Selection
-
-Our approach is to combine expert knowhow and statistical models to detect anomalies. Further, for us to understand if our model has produced useful outputs, anomalies should be labelled based on a predefined set of characteristics (e.g. peak energy consumption, high baseload etc.).
-
-### Thresholding
-
-Very simple cases of anomalies should actually be detected using expert knowhow.
-
-Possible Features:
-
-- Baseload (especially during weekends)
-  - total baseload
-  - delta baseload
-- Fast Fourier Transform (Frequency Analysis)
-  - small variance in amplitude is good for energy producer
-- Gradient might be interesting, because it might indicate unusual increases in energy consumption
-- Negative values
-- Zero values
-
-### Stats/ML-based 
-
-A more sophisticated ML/Stats-based model should be used to find unusual patterns, that are hard to detect by static rules and therefore might not be easily quantifiable by experts.
-
-**Models**
-
-We have tried the following models:
-
-- Isolation Forest: Isolation Forest detects anomalies purely based on the fact that anomalies are data points that are few and different.
-- 
-- ARIMA Model: Time-series forecasting model and 
-
--- Minutely/Hourly Model (Online) --> Predictive Model
--- Daily Model (Historic)
--- Weekly Model (Historic)
 
 ## Dev Setup
 

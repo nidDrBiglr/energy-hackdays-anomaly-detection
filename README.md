@@ -17,6 +17,8 @@ This challenge is looking for data scientists to apply their skills to an anomal
 
 A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomaly-detection-smart-meter-data-sample) can be found on kaggle. Participants are encouraged to find other smart meter data to work with in order to test their algorithms.
 
+During the course of the Hackathon, we have created multiple other anonymised datasets (kindly provided by [Solarify](https://solarify.ch/?lang=en)) that can be found under `./anomaly-detection-model/data`.
+
 ## Approach
 
 - Create a basic model to detect anomalies
@@ -29,17 +31,49 @@ A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomal
 
 ![Approach Draft](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/approach.jpg "Approach Draft")
 
+## Implementation
 
-## Development
+![Architecture](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/MeterOS.png "Architecture")
 
-### Frontend
+We have implemented a scalable architecture, based on the following components:
+- Meter-Service: Microservice that receives, processes, stores and exposes meter data
+- Meter-UI (meterOS): UI to display meter data and anomalies
+- Anomaly-Detector: Running App with deployed Anomaly Detector model (Thanks to Konstantin Golubev, Manuel Baez, Xue Wang)
+- Kafka Data Stream for real time processing
 
-To locally start the development server, first run `npm install` and afterwards `npm start`. This will start a development server which is reachable at http://localhost:4200
+## Model Selection
 
-To build and push the docker image, run the following commands
+Our approach is to combine expert knowhow and statistical models to detect anomalies. Further, for us to understand if our model has produced useful outputs, anomalies should be labelled based on a predefined set of characteristics (e.g. peak energy consumption, high baseload etc.).
 
-```
-npm run build-prod
-docker build --no-cache -t eu.gcr.io/akenza-core-staging/meter-service-ui:v0.0.1 .
-docker push eu.gcr.io/akenza-core-staging/meter-service-ui:v0.0.1
-```
+### Thresholding
+
+Very simple cases of anomalies should actually be detected using expert knowhow. For this, we defined a standardised expert model based on historic data:
+
+1) Structure load curve on weekly basis
+
+Possible Features:
+
+- Baseload (especially during weekends)
+  - total baseload
+  - delta baseload
+- Fast Fourier Transform (Frequency Analysis)
+  - small variance in amplitude is good for energy producer
+- Gradient might be interesting, because it might indicate unusual increases in energy consumption
+- Negative values
+- Zero values
+
+### Stats/ML-based 
+
+A more sophisticated ML/Stats-based model should be used to find unusual patterns, that are hard to detect by static rules and therefore might not be easily quantifiable by experts.
+
+**Models**
+
+We have tried the following models:
+
+- Isolation Forest: Isolation Forest detects anomalies purely based on the fact that anomalies are data points that are few and different.
+- 
+- ARIMA Model: Time-series forecasting model and 
+
+-- Minutely/Hourly Model (Online) --> Predictive Model
+-- Daily Model (Historic)
+-- Weekly Model (Historic)

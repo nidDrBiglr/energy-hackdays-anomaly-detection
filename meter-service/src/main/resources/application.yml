@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: meter-service
+  main:
+    banner-mode: off
+
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+
+  # Kafka
+  kafka:
+    bootstrap-servers: "pkc-4ygn6.europe-west3.gcp.confluent.cloud:9092"
+    properties:
+      ssl.endpoint.identification.algorithm: https
+      sasl.mechanism: PLAIN
+      request.timeout.ms: 20000
+      security.protocol: SASL_SSL
+      retry.backoff.ms: 500
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='${CLUSTER_API_KEY}' password='${CLUSTER_API_SECRET}';
+      # Confluent Cloud Schema Registry
+      schema.registry.url: ${SR_URL}
+      schema.registry.basic.auth.user.info: ${SR_API_KEY}:${SR_API_SECRET}
+      basic.auth.credentials.source: USER_INFO
+
+    listener:
+      missing-topics-fatal: false
+
+app:
+  mongo-db-properties:
+    uri: ${MONGO_URI}
+    database: meter_data
+
+server:
+  port: 8080
+
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 6831
+    log-spans: false
+  spring:
+    cloud:
+      jdbc:
+        ignoreStatements: "/* ping */ SELECT 1"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health,info,prometheus'
+    enabled-by-default: true
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    prometheus:
+      enabled: true
+      cache:
+        time-to-live: 0ms
+    info:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  info:
+    git:
+      mode: simple
+  server:
+    port: 8880
+
+info:
+  app:
+    java:
+      target: @java.version@

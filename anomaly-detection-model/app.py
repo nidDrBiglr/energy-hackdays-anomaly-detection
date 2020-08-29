@@ -10,6 +10,7 @@ import flask
 import io
 import pandas as pd
 import pickle
+import collections as cl
 
 
 # initialize our Flask application and the Keras model

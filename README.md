@@ -54,6 +54,8 @@ Our approach is to combine expert knowhow and statistical models to detect anoma
 
 ### Expert Model
 
+To find out what a human would consider as an anomaly, we did an extensive analysis on a smart meter dataset: `./anomaly-detection-model/Manual_Anomaly_Detection_V3.docx`.
+
 Very simple cases of anomalies should actually be detected using expert knowhow. For this, we defined a standardised expert model based on historic data:
 
 1) Structure load curve on weekly basis

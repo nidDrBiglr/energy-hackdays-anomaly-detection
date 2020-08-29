@@ -1,6 +1,6 @@
 # energy-hackdays-anomaly-detection
 
-Challenge [#14](https://hack.opendata.ch/project/579): "Anomaly Detection for Smart Meter Devices" from the open energy hackdays 2020
+Challenge [#14](https://hack.opendata.ch/project/579): "Anomaly Detection for Smart Meter Devices" from the open energy hackdays 2020 (Clemap)
 
 Energy consumption in buildings and industry is often wasted due to user behaviour, human error, and poorly performing equipment. In this context, identifying abnormal consumption power behavior can be an important part of reducing peak energy consumption and changing undesirable user behavior. With the widespread rollouts of smart meters, normal operating consumption can be learned over time and used to identify or flag abnormal consumption. Such information can help indicate to users when their equipment is not operating as normal and can help to change user behavior or to even indicate what the problem appliances may be to implement lasting changes.
 

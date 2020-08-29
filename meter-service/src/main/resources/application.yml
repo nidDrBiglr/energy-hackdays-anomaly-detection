@@ -27,7 +27,7 @@ spring:
 
 app:
   mongo-db-properties:
-    uri: mongodb://apisfucus:gm3nSNcJQZeUni2J@stagingcluster-shard-00-00-voj0k.gcp.mongodb.net:27017,stagingcluster-shard-00-01-voj0k.gcp.mongodb.net:27017,stagingcluster-shard-00-02-voj0k.gcp.mongodb.net:27017/mellolam?ssl=true&replicaSet=StagingCluster-shard-0&authSource=admin
+    uri: ${MONGO_URI}
     database: meter_data
 
 server:

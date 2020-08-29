@@ -7,6 +7,7 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { DataService } from '../service/data.service';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { PubSubService } from '../service/pubsub.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
   private chart: am4charts.XYChart;
   private data: am4charts.LineSeries;
   private anomalies: am4charts.LineSeries;
+  private label: am4core.Label;
   @Input() meterId: string;
   @Input() from: Moment;
   @Input() to: Moment;
@@ -26,25 +28,23 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId,
     private zone: NgZone,
-    private dataService: DataService) {
+    private dataService: DataService,
+    private pubSubService: PubSubService) {
+    this.pubSubService.Stream.subscribe(event => {
+      this.browserOnly(() => {
+        if (this.chart) {
+          this.chart.disposeData();
+        }
+        this.initializeChart();
+        this.updateData(event.meterId, event.from, event.to);
+      });
+    });
   }
 
   ngAfterViewInit(): void {
     this.browserOnly(() => {
       this.initializeChart();
-      this.dataService.getData(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe((data: any[]) => {
-        // somehow amcharts is not able to parse the ISO string directly
-        data.forEach((value) => {
-          value.date = moment(value.time).toDate();
-        });
-        this.data.data = data;
-      });
-      this.dataService.getAnomalies(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe((anomalies: any[]) => {
-        anomalies.forEach((value) => {
-          value.date = moment(value.time).toDate();
-        });
-        this.anomalies.data = anomalies;
-      });
+      this.updateData(this.meterId, this.from, this.to);
     });
   }
 
@@ -56,8 +56,39 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
     });
   }
 
+  public updateData(meterId: string, from: Moment, to: Moment): void {
+    this.data.data = [];
+    this.anomalies.data = [];
+    console.log(meterId, from, to);
+    this.dataService.getData(meterId, from.toISOString(), to.toISOString()).subscribe((data: any[]) => {
+      // somehow amcharts is not able to parse the ISO string directly
+      data.forEach((value) => {
+        value.date = moment(value.timestamp).toDate();
+      });
+      data.sort((a: any, b: any) => {
+        return a.date.getTime() - b.date.getTime();
+
+      });
+      this.data.data = data;
+      if (this.label) {
+        // remove the label to avoid re-drawing
+        this.label.dispose();
+      }
+      this.checkEmptyData();
+    });
+    this.dataService.getAnomalies(this.meterId, this.from.toISOString(), this.to.toISOString()).subscribe((anomalies: any[]) => {
+      anomalies.forEach((value) => {
+        value.date = moment(value.timestamp).toDate();
+      });
+      anomalies.sort((a: any, b: any) => {
+        return a.date.getTime() - b.date.getTime();
+
+      });
+      this.anomalies.data = anomalies;
+    });
+  }
+
   private initializeChart(): void {
-    am4core.useTheme(am4themes_animated);
     // chart config
     const chart = am4core.create('chart', am4charts.XYChart);
     chart.paddingRight = 20;
@@ -102,6 +133,21 @@ export class ChartComponent implements OnDestroy, AfterViewInit {
 // todo: add forecasts, fetch data from api
 
     this.chart = chart;
+  }
+
+  private checkEmptyData(): void {
+    if (this.data.data.length === 0) {
+      this.label = this.chart.chartContainer.createChild(am4core.Label);
+      this.label.text = 'No data has been found in the selected timespan';
+      this.label.fontSize = 18;
+      this.label.fill = am4core.color('rgb(38, 38, 38)');
+      this.label.fillOpacity = 1;
+      this.label.isMeasured = false;
+      this.label.x = am4core.percent(53);
+      this.label.y = am4core.percent(42);
+      this.label.horizontalCenter = 'middle';
+      this.label.verticalCenter = 'middle';
+    }
   }
 
   private browserOnly(f: () => void): void {

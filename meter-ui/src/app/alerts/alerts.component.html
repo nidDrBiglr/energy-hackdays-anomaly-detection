@@ -3,7 +3,7 @@
   <nz-table #basicTable [nzData]="dataSet" [nzNoResult]="empty" [nzShowPagination]="false">
     <thead>
     <tr>
-      <th>Severity</th>
+      <th nzWidth="100px">Severity</th>
       <th>Value</th>
       <th>Timestamp</th>
     </tr>
@@ -16,7 +16,7 @@
         <i nz-icon nzType="issues-close" style="color: green; font-size: 30px;" nzTheme="outline" *ngIf="data.severity === 'LOW'"></i>
       </td>
       <td>{{data.kWh}} kWh</td>
-      <td>{{data.time | date : 'dd.MM.yyyy hh:mm:ss'}}</td>
+      <td>{{data.timestamp | date : 'dd.MM.yyyy hh:mm:ss'}}</td>
     </tr>
     </tbody>
   </nz-table>

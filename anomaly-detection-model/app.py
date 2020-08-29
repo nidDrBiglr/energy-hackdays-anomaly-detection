@@ -21,14 +21,15 @@ def load_model():
     global model
     pretrained_freqs = open("pretrained_freqs.pkl", "rb")
     global appr
-    appr = pickle.load(pretrained_freqs)
+    #appr = pickle.load(pretrained_freqs)
+    appr = cl.defaultdict(float)
 
 @app.route("/predict", methods=["POST"])
 def predict():
     # initialize the data dictionary that will be returned from the
     # view
     count = 0
-    alert_threshold = 0.0005
+    alert_threshold = 0.005
     data = {"success": False}
     if flask.request.method == "POST":
         content = flask.request.json
@@ -59,6 +60,10 @@ def predict():
                     "severity": "HIGH",
                     "success": True
                 }
+            #reset model
+            if count == 10000:
+                appr = cl.defaultdict(float)
+                count = 0
 
     # return the data dictionary as a JSON response
     return flask.jsonify(data)

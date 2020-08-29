@@ -31,8 +31,8 @@ jupyter notebook
 Build application:
 
 ```
-docker build -t eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.3 .
-docker push eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.3
+docker build -t eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.4 .
+docker push eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.4
 
 docker run -p 5000:5000  eu.gcr.io/akenza-core-staging/anomaly-detector:v0.0.3
 curl -X POST 'http://localhost:5000/predict'

@@ -13,6 +13,12 @@ This challenge is looking for data scientists to apply their skills to an anomal
 - David Giger
 - Marius Giger
 
+In Collaboration with 
+
+- Manuel Baez
+- Konstantin Golubev
+- Xue Wang
+
 ##  Data
 
 A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomaly-detection-smart-meter-data-sample) can be found on kaggle. Participants are encouraged to find other smart meter data to work with in order to test their algorithms.
@@ -36,6 +42,7 @@ During the course of the Hackathon, we have created multiple other anonymised da
 ![Architecture](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/MeterOS.png "Architecture")
 
 We have implemented a scalable architecture, based on the following components:
+- Smart Meter Simulator based on Iotify
 - Meter-Service: Microservice that receives, processes, stores and exposes meter data
 - Meter-UI (meterOS): UI to display meter data and anomalies
 - Anomaly-Detector: Running App with deployed Anomaly Detector model (Thanks to Konstantin Golubev, Manuel Baez, Xue Wang)
@@ -70,10 +77,23 @@ A more sophisticated ML/Stats-based model should be used to find unusual pattern
 
 We have tried the following models:
 
-- Isolation Forest: Isolation Forest detects anomalies purely based on the fact that anomalies are data points that are few and different.
-- 
-- ARIMA Model: Time-series forecasting model and 
+- **Isolation Forest**: Isolation Forest detects anomalies purely based on the fact that anomalies are data points that are few and different.
 
--- Minutely/Hourly Model (Online) --> Predictive Model
--- Daily Model (Historic)
--- Weekly Model (Historic)
+![IsolationForest.png](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/IsolationForest.png "IsolationForest.png")
+
+- **One Class SVM**: Unsupervised Outlier Detection based on a Support Vector Machine. It is known to be sensitive to outliers.
+
+![OneClassSVM.png](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/OneClassSVM.png "OneClassSVM.png")
+
+- **ARIMA Model**: Time-series forecasting model and analysis of the prediction deviation. Also possible to spot patterns accross time. 
+
+![ARIMA.png](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/ARIMA.png "ARIMA.png")
+![ARIMA1.png](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/ARIMA1.png "ARIMA1.png")
+
+- **Monte Carlo Model**: Frequency analysis of kWh values. Monte Carlo Approach -- call single reading of a meter anomalous if it hasn't appeared often in the past. Blazingly Fast (can run on Raspberry Pi), Adaptive, Easy to tune. Not able to detect patterns that span accross time.
+
+A possible way forward could be to implement different models for different temporal patterns:
+
+- Minutely/Hourly Model (Online) --> Predictive Model
+- Daily Model (Historic)
+- Weekly Model (Historic)

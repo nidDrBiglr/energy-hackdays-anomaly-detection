@@ -21,5 +21,5 @@ mvn -Dmaven.test.skip=true -Dgoogle-project=akenza-core-staging package dockerfi
 
 mvn package -DskipTests=true
 docker build --build-arg JAR_FILE=target/meter-service-0.0.1-SNAPSHOT.jar -t eu.gcr.io/akenza-core-staging/meter-service:v0.0.1 . 
-docker push eu.gcr.io/akenza-core-staging/meter-service:66abffec37279f69593474af0e741feae536befc
+docker push eu.gcr.io/akenza-core-staging/meter-service:362072c8dab3fd0ef1125897d3ffa11bf0e4396c
 ```{.sh}   

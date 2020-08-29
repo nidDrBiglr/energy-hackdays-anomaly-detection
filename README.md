@@ -1,4 +1,4 @@
-# energy-hackdays-anomaly-detection
+# meterOS - Smart Meter Anomaly Detection
 
 Challenge [#14](https://hack.opendata.ch/project/579): "Anomaly Detection for Smart Meter Devices" from the open energy hackdays 2020 (Clemap)
 
@@ -6,18 +6,18 @@ Energy consumption in buildings and industry is often wasted due to user behavio
 
 This challenge is looking for data scientists to apply their skills to an anomaly detection problem using smart meter data. Ideally, such an algorithm should begin to operate after as little as 3 months and should improve over time. A platform to visualise the anomalies would also be useful. Users can select any type of machine learning algorithms that they wish to in order to detect the anomalies from the data.
 
-### Group Members
+## Group Members
 
 - Raimund Neubauer
 - Vikram Bhatnagar
 - David Giger
 - Marius Giger
 
-###  Data
+##  Data
 
 A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomaly-detection-smart-meter-data-sample) can be found on kaggle. Participants are encouraged to find other smart meter data to work with in order to test their algorithms.
 
-### Approach
+## Approach
 
 - Create a basic model to detect anomalies
 - Create a visualization layer to present anomalies
@@ -27,7 +27,8 @@ A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomal
   - Implement online prediction of anomalies
   - Implement online learning
 
-![Approach Draft](https://github.com/nidDrBiglr/energy-hackdays-anomaly-detection/blob/master/approach.jpg "Approach Draft")
+![Approach Draft](https://raw.githubusercontent.com/nidDrBiglr/energy-hackdays-anomaly-detection/master/approach.jpg "Approach Draft")
+
 
 ## Development
 

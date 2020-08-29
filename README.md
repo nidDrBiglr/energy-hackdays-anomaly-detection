@@ -19,6 +19,8 @@ In Collaboration with
 - Konstantin Golubev
 - Xue Wang
 
+The pitch can be found `./20200829_meterOS_Energy_Data_Hackdays_2020_Pitch.pptx`.
+
 ##  Data
 
 A sample including smart meter [data](https://www.kaggle.com/portiamurray/anomaly-detection-smart-meter-data-sample) can be found on kaggle. Participants are encouraged to find other smart meter data to work with in order to test their algorithms.

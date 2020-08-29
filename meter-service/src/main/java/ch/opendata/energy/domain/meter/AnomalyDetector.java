@@ -37,7 +37,6 @@ public class AnomalyDetector {
       .publishOn(scheduler)
       .concatMap(message -> consume(message.value())
         .thenEmpty(message.receiverOffset().commit())
-        .log()
         .retryWhen(Retry.backoff(10, Duration.ofMillis(500))))
       .doOnError(e -> log.error("could not process Mongo output", e))
       .doOnCancel(() -> close())
@@ -55,7 +54,7 @@ public class AnomalyDetector {
     }
 
     List<AnomalyDocument> anomalies = new ArrayList<>();
-    if (event.getKWh() <= 0) {
+    if (event.getKWh() != null && event.getKWh() <= 0) {
       AnomalyDocument anomaly = AnomalyDocument.builder()
         .kWh(event.getKWh())
         .timestamp(event.getTimestamp())

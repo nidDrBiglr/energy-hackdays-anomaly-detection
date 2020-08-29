@@ -62,9 +62,9 @@ def predict():
                     "success": True
                 }
             #reset model
-            if count == 10000:
-                appr = cl.defaultdict(float)
-                count = 0
+            # if count >= 10000:
+            #     appr = cl.defaultdict(float)
+            #     count = 0
 
     # return the data dictionary as a JSON response
     return flask.jsonify(data)

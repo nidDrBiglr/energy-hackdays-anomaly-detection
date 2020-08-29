@@ -4,7 +4,7 @@
 
 The original dataset is hosted on [Kaggle](https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014#).
 
-During the course of the Hackathon, we have created multiple other datasets (kindly provided by [Solarify](https://solarify.ch/?lang=en)) that can be found under `./data`.
+During the course of the Hackathon, we have created multiple other anonymised datasets (kindly provided by [Solarify](https://solarify.ch/?lang=en)) that can be found under `./data`.
 
 ## Model Selection
 
@@ -12,7 +12,10 @@ Our approach is to combine expert knowhow and statistical models to detect anoma
 
 ### Thresholding
 
-Very simple cases of anomalies should actually be detected using expert knowhow.
+Very simple cases of anomalies should actually be detected using expert knowhow. For this, we defined a standardised expert model based on historic data:
+1) Structure load curve on weekly basis
+
+2) 
 
 Possible Features:
 
